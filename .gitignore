@@ -1,2 +1,6 @@
 python3/lib/python3.11/site-packages/
 python3/
+.DS_Store
+models/
+labelImg/
+pretrained_model/
