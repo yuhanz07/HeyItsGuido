@@ -6,3 +6,4 @@ labelImg/
 pretrained_model/
 code/xml2tfrecord/train.record
 python3/
+code/xml2tfrecord/val.record
