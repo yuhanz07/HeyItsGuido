@@ -1,7 +1,7 @@
 <annotation>
 	<folder>captured_pic</folder>
 	<filename>4.jpg</filename>
-	<path>/Users/wanhoo/Documents/CSE40883/code/Pi Only Files/captured_pic/4.jpg</path>
+	<path>/Users/wanhoo/Documents/CSE40883/dataset/captured_pic/4.jpg</path>
 	<source>
 		<database>Unknown</database>
 	</source>
@@ -33,6 +33,18 @@
 			<ymin>543</ymin>
 			<xmax>869</xmax>
 			<ymax>690</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>yellowline</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1070</xmin>
+			<ymin>697</ymin>
+			<xmax>1259</xmax>
+			<ymax>1003</ymax>
 		</bndbox>
 	</object>
 </annotation>

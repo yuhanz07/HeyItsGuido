@@ -2,7 +2,7 @@ import os
 from sklearn.model_selection import train_test_split
 
 # Path to your annotations
-annotation_dir = "/Users/wanhoo/Documents/CSE40883/code/Pi Only Files/captured_pic"
+annotation_dir = "/Users/wanhoo/Documents/CSE40883/dataset/captured_pic"
 
 # Path to output folder (can be anywhere you like)
 output_dir = "/Users/wanhoo/Documents/CSE40883/code/xml2tfrecord"

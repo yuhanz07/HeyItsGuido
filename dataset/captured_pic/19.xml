@@ -1,7 +1,7 @@
 <annotation>
 	<folder>captured_pic</folder>
 	<filename>19.jpg</filename>
-	<path>/Users/wanhoo/Documents/CSE40883/code/Pi Only Files/captured_pic/19.jpg</path>
+	<path>/Users/wanhoo/Documents/CSE40883/dataset/captured_pic/19.jpg</path>
 	<source>
 		<database>Unknown</database>
 	</source>
@@ -12,15 +12,15 @@
 	</size>
 	<segmented>0</segmented>
 	<object>
-		<name>turnleft</name>
+		<name>yellowline</name>
 		<pose>Unspecified</pose>
-		<truncated>1</truncated>
+		<truncated>0</truncated>
 		<difficult>0</difficult>
 		<bndbox>
-			<xmin>6</xmin>
-			<ymin>540</ymin>
-			<xmax>341</xmax>
-			<ymax>1080</ymax>
+			<xmin>428</xmin>
+			<ymin>971</ymin>
+			<xmax>1888</xmax>
+			<ymax>1011</ymax>
 		</bndbox>
 	</object>
 </annotation>

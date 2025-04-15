@@ -7,11 +7,11 @@ from PIL import Image
 from object_detection.utils import dataset_util
 
 # --- USER CONFIG ---
-LABEL_MAP = {'gostraight': 1, 'turnleft': 2}  # must match label_map.pbtxt
-IMAGE_DIR = "/Users/wanhoo/Documents/CSE40883/code/Pi Only Files/captured_pic"
-ANNOTATION_DIR = "/Users/wanhoo/Documents/CSE40883/code/Pi Only Files/captured_pic"
-SPLIT = "train"  # or "val"
-SPLIT_LIST = "/Users/wanhoo/Documents/CSE40883/code/xml2tfrecord/train.txt"  # a txt file listing filenames (no extension) to include in this TFRecord
+LABEL_MAP = {'gostraight': 1, 'turnleft': 2, 'turnright': 3, 'stop': 4, 'yellowline': 5}  # must match label_map.pbtxt
+IMAGE_DIR = "/Users/wanhoo/Documents/CSE40883/dataset/captured_pic"
+ANNOTATION_DIR = "/Users/wanhoo/Documents/CSE40883/dataset/captured_pic"
+SPLIT = "val"  # or "val"
+SPLIT_LIST = "/Users/wanhoo/Documents/CSE40883/code/xml2tfrecord/val.txt"  # a txt file listing filenames (no extension) to include in this TFRecord
 OUTPUT_PATH = f"/Users/wanhoo/Documents/CSE40883/code/xml2tfrecord/{SPLIT}.record"
 
 # --- CORE LOGIC ---

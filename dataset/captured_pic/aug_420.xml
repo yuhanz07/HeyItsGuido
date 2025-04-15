@@ -1,0 +1,14 @@
+<annotation>
+	<folder>captured_pic</folder>
+	<filename>aug_420.jpg</filename>
+	<path>/Users/wanhoo/Documents/CSE40883/dataset/captured_pic/18.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1920</width>
+		<height>1080</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object><name>turnleft</name><pose>Unspecified</pose><truncated>0</truncated><difficult>0</difficult><bndbox><xmin>302</xmin><ymin>484</ymin><xmax>641</xmax><ymax>832</ymax></bndbox></object><object><name>yellowline</name><pose>Unspecified</pose><truncated>0</truncated><difficult>0</difficult><bndbox><xmin>940</xmin><ymin>876</ymin><xmax>1034</xmax><ymax>1021</ymax></bndbox></object></annotation>
