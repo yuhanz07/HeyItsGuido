@@ -1,2 +1,2 @@
 # HeyItsGuido
-Intro to Robotics project
+Intro to Robotics course project
