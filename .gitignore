@@ -1,9 +1,24 @@
-python3/lib/python3.11/site-packages/
 python3/
-.DS_Store
-models/
 labelImg/
 pretrained_model/
-code/xml2tfrecord/train.record
-python3/
-code/xml2tfrecord/val.record
+dataset/ 
+exported_model/ 
+design/ 
+models/ 
+models_patched/ 
+training/
+training_backup/
+
+# Huge files
+*.record
+*.pbtxt
+*.DS_Store
+
+# TensorBoard logs
+events.out.*
+
+# Cache, build, and temporary files
+__pycache__/
+*.pyc
+*.pyo
+*.swp
