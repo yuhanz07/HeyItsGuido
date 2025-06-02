@@ -47,7 +47,9 @@ training_backup/
 *.pb
 *.ckpt*
 *.tflite
-*.h5
+code/auto/saved_model/
+code/auto/saved_model_new/
+code/auto/*.h5
 
 # TF record files and label maps
 *.record
@@ -55,6 +57,9 @@ training_backup/
 
 # Dataset (unless small sample is added manually)
 dataset/
+
+# Testing video
+*.MOV
 
 # macOS system files
 .DS_Store

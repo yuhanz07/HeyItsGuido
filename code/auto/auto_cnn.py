@@ -242,8 +242,8 @@ while True:
     if pending_action:
         print(f"Executing action: {pending_action}")
         if pending_action == 'turnleft':
-            move.move_forward(speed=50, duration=2.75)
-            move.turn_left(speed=30, duration=1.75)
+            move.move_forward(speed=50, duration=2.68)
+            move.turn_left(speed=30, duration=1.5)
         elif pending_action == 'turnright':
             move.move_forward(speed=50, duration=2.68)
             move.turn_right(speed=30, duration=2)
@@ -277,3 +277,5 @@ while True:
 cv2.destroyAllWindows()
 picam2.stop()
 move.close()
+
+

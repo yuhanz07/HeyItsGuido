@@ -57,6 +57,12 @@ while True:
         line_thickness=3,
         min_score_thresh=0.5
     )
+    
+#     ymin, xmin, ymax, xmax = boxes[i]
+#     bbox_height_pixels = (ymax - ymin) * 480
+#     distance = (KNOWN_HEIGHT * FOCAL_LENGTH) / bbox_height_pixels if bbox_height_pixels > 0 else float('inf')
+#     ymin, xmin, ymax, xmax = boxes[i]
+#     print(f"Detected {class_name} at ~{distance:.2f}m")
 
     if current_time >= action_lock_until:
         # Process turn signs with CNN
@@ -96,7 +102,7 @@ while True:
 
                 print(f"[CNN] Prediction: {label} ({confidence:.2f})")
 
-                if confidence > 0.90:
+                if confidence > 0.9:
                     pending_action = label
                     action_taken = True
                     break  # only act on one sign at a time
@@ -107,11 +113,11 @@ while True:
     if pending_action and current_time >= action_lock_until:
         print(f"Executing action: {pending_action}")
         if pending_action == 'turnleft':
-            move.move_forward(speed=50, duration=2.75)
-            move.turn_left(speed=30, duration=1.75)
-        elif pending_action == 'turnright':
             move.move_forward(speed=50, duration=2.68)
-            move.turn_right(speed=30, duration=2.0)
+            move.turn_left(speed=30, duration=2)
+        elif pending_action == 'turnright':
+            move.move_forward(speed=50, duration=2.75)
+            move.turn_right(speed=30, duration=2)
         action_lock_until = time.time() + ACTION_COOLDOWN
         pending_action = None
         action_taken = True
@@ -121,13 +127,14 @@ while True:
         for i in range(len(scores)):
             if scores[i] < 0.90:
                 continue
-
+            
             class_id = classes[i]
             class_name = category_index[class_id]['name']
 
             if class_name == 'yellowline':
                 yellow_detected = True
             elif class_name == 'stop':
+                move.move_forward(speed=50, duration=2)
                 move.stop(duration=1.2)
                 action_taken = True
                 break
