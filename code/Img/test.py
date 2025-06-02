@@ -8,9 +8,9 @@ from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as viz_utils
 
 # Load saved model
-PATH_TO_MODEL = "/Users/wanhoo/Documents/CSE40883/exported_model/saved_model"
-PATH_TO_LABELS = "/Users/wanhoo/Documents/CSE40883/dataset/label_map.pbtxt"
-PATH_TO_IMAGE = "/Users/wanhoo/Documents/CSE40883/dataset/captured_pic/test1.jpg"
+PATH_TO_MODEL = "/Users/wanhoo/Documents/CSE40883/exported_model_lr/saved_model"
+PATH_TO_LABELS = "/Users/wanhoo/Documents/CSE40883/dataset/label_map_lr.pbtxt"
+PATH_TO_IMAGE = "/Users/wanhoo/Documents/CSE40883/dataset/new_pics/1.jpg"
 
 detect_fn = tf.saved_model.load(PATH_TO_MODEL)
 
@@ -39,6 +39,10 @@ viz_utils.visualize_boxes_and_labels_on_image_array(
 print("Scores:", detections['detection_scores'][0].numpy()[:5])
 print("Boxes:", detections['detection_boxes'][0].numpy()[:5])
 print("Classes:", detections['detection_classes'][0].numpy().astype(np.int32)[:5])
+print("Category Index:")
+for class_id, class_info in category_index.items():
+    print(f"ID {class_id}: {class_info['name']}")
+
 
 cv2.imshow('Result', image_np)
 cv2.waitKey(0)

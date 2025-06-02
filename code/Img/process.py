@@ -34,97 +34,166 @@
 
 
 
-import os
-import xml.etree.ElementTree as ET
-import numpy as np
-from imgaug import augmenters as iaa
-from imgaug.augmentables.bbs import BoundingBox, BoundingBoxesOnImage
-import imageio.v2 as imageio
-from PIL import Image
-import shutil
+# import os
+# import xml.etree.ElementTree as ET
+# import numpy as np
+# from imgaug import augmenters as iaa
+# from imgaug.augmentables.bbs import BoundingBox, BoundingBoxesOnImage
+# import imageio.v2 as imageio
+# from PIL import Image
+# import shutil
 
-input_img_dir = '/Users/wanhoo/Documents/CSE40883/dataset/captured_pic'
-input_xml_dir = '/Users/wanhoo/Documents/CSE40883/dataset/captured_pic'
-output_img_dir = '/Users/wanhoo/Documents/CSE40883/dataset/newcappic'
-output_xml_dir = '/Users/wanhoo/Documents/CSE40883/dataset/newcappic'
+# input_img_dir = '/Users/wanhoo/Documents/CSE40883/dataset/captured_pic'
+# input_xml_dir = '/Users/wanhoo/Documents/CSE40883/dataset/captured_pic'
+# output_img_dir = '/Users/wanhoo/Documents/CSE40883/dataset/newcappic'
+# output_xml_dir = '/Users/wanhoo/Documents/CSE40883/dataset/newcappic'
 
-os.makedirs(output_img_dir, exist_ok=True)
-os.makedirs(output_xml_dir, exist_ok=True)
+# os.makedirs(output_img_dir, exist_ok=True)
+# os.makedirs(output_xml_dir, exist_ok=True)
 
-# Define augmentations (these affect both image & bounding box)
-seq = iaa.Sequential([
-    iaa.Fliplr(0.5),
-    iaa.Affine(rotate=(-25, 25)),
-    iaa.Multiply((0.7, 1.3)),
-    iaa.AdditiveGaussianNoise(scale=(5, 15)),
-    iaa.GaussianBlur(sigma=(0.0, 1.0))
-])
+# # Define augmentations (these affect both image & bounding box)
+# seq = iaa.Sequential([
+#     iaa.Fliplr(0.5),
+#     iaa.Affine(rotate=(-25, 25)),
+#     iaa.Multiply((0.7, 1.3)),
+#     iaa.AdditiveGaussianNoise(scale=(5, 15)),
+#     iaa.GaussianBlur(sigma=(0.0, 1.0))
+# ])
 
-def parse_voc_xml(xml_file):
-    tree = ET.parse(xml_file)
-    root = tree.getroot()
-    bboxes = []
-    for obj in root.findall('object'):
-        name = obj.find('name').text
-        xml_box = obj.find('bndbox')
-        bbox = BoundingBox(
-            x1=int(xml_box.find('xmin').text),
-            y1=int(xml_box.find('ymin').text),
-            x2=int(xml_box.find('xmax').text),
-            y2=int(xml_box.find('ymax').text),
-            label=name
-        )
-        bboxes.append(bbox)
-    return tree, root, bboxes
+# def parse_voc_xml(xml_file):
+#     tree = ET.parse(xml_file)
+#     root = tree.getroot()
+#     bboxes = []
+#     for obj in root.findall('object'):
+#         name = obj.find('name').text
+#         xml_box = obj.find('bndbox')
+#         bbox = BoundingBox(
+#             x1=int(xml_box.find('xmin').text),
+#             y1=int(xml_box.find('ymin').text),
+#             x2=int(xml_box.find('xmax').text),
+#             y2=int(xml_box.find('ymax').text),
+#             label=name
+#         )
+#         bboxes.append(bbox)
+#     return tree, root, bboxes
 
-def update_voc_xml(root, bboxes_aug, new_filename, img_shape):
-    # Update filename and size
-    root.find('filename').text = new_filename
-    size = root.find('size')
-    size.find('width').text = str(img_shape[1])
-    size.find('height').text = str(img_shape[0])
+# def update_voc_xml(root, bboxes_aug, new_filename, img_shape):
+#     # Update filename and size
+#     root.find('filename').text = new_filename
+#     size = root.find('size')
+#     size.find('width').text = str(img_shape[1])
+#     size.find('height').text = str(img_shape[0])
 
-    # Remove old objects
-    for obj in root.findall('object'):
-        root.remove(obj)
+#     # Remove old objects
+#     for obj in root.findall('object'):
+#         root.remove(obj)
 
-    for bbox in bboxes_aug.bounding_boxes:
-        obj = ET.SubElement(root, 'object')
-        ET.SubElement(obj, 'name').text = bbox.label
-        ET.SubElement(obj, 'pose').text = 'Unspecified'
-        ET.SubElement(obj, 'truncated').text = '0'
-        ET.SubElement(obj, 'difficult').text = '0'
-        bndbox = ET.SubElement(obj, 'bndbox')
-        ET.SubElement(bndbox, 'xmin').text = str(int(bbox.x1))
-        ET.SubElement(bndbox, 'ymin').text = str(int(bbox.y1))
-        ET.SubElement(bndbox, 'xmax').text = str(int(bbox.x2))
-        ET.SubElement(bndbox, 'ymax').text = str(int(bbox.y2))
-    return root
+#     for bbox in bboxes_aug.bounding_boxes:
+#         obj = ET.SubElement(root, 'object')
+#         ET.SubElement(obj, 'name').text = bbox.label
+#         ET.SubElement(obj, 'pose').text = 'Unspecified'
+#         ET.SubElement(obj, 'truncated').text = '0'
+#         ET.SubElement(obj, 'difficult').text = '0'
+#         bndbox = ET.SubElement(obj, 'bndbox')
+#         ET.SubElement(bndbox, 'xmin').text = str(int(bbox.x1))
+#         ET.SubElement(bndbox, 'ymin').text = str(int(bbox.y1))
+#         ET.SubElement(bndbox, 'xmax').text = str(int(bbox.x2))
+#         ET.SubElement(bndbox, 'ymax').text = str(int(bbox.y2))
+#     return root
 
-original_files = [f for f in os.listdir(input_img_dir) if f.lower().endswith(('.jpg', '.png'))]
-image_count = 0
+# original_files = [f for f in os.listdir(input_img_dir) if f.lower().endswith(('.jpg', '.png'))]
+# image_count = 0
 
-while image_count < 500:
-    for img_file in original_files:
-        img_path = os.path.join(input_img_dir, img_file)
-        xml_path = os.path.join(input_xml_dir, os.path.splitext(img_file)[0] + '.xml')
+# while image_count < 500:
+#     for img_file in original_files:
+#         img_path = os.path.join(input_img_dir, img_file)
+#         xml_path = os.path.join(input_xml_dir, os.path.splitext(img_file)[0] + '.xml')
 
-        image = imageio.imread(img_path)
-        tree, root, bboxes = parse_voc_xml(xml_path)
-        bbs_on_image = BoundingBoxesOnImage(bboxes, shape=image.shape)
+#         image = imageio.imread(img_path)
+#         tree, root, bboxes = parse_voc_xml(xml_path)
+#         bbs_on_image = BoundingBoxesOnImage(bboxes, shape=image.shape)
 
-        image_aug, bbs_aug = seq(image=image, bounding_boxes=bbs_on_image)
-        bbs_aug = bbs_aug.remove_out_of_image().clip_out_of_image()
+#         image_aug, bbs_aug = seq(image=image, bounding_boxes=bbs_on_image)
+#         bbs_aug = bbs_aug.remove_out_of_image().clip_out_of_image()
 
-        # Save augmented image
-        new_img_name = f"aug_{image_count}.jpg"
-        Image.fromarray(image_aug).save(os.path.join(output_img_dir, new_img_name))
+#         # Save augmented image
+#         new_img_name = f"aug_{image_count}.jpg"
+#         Image.fromarray(image_aug).save(os.path.join(output_img_dir, new_img_name))
 
-        # Save updated XML
-        new_xml_root = update_voc_xml(root, bbs_aug, new_img_name, image_aug.shape)
-        tree.write(os.path.join(output_xml_dir, f"aug_{image_count}.xml"))
+#         # Save updated XML
+#         new_xml_root = update_voc_xml(root, bbs_aug, new_img_name, image_aug.shape)
+#         tree.write(os.path.join(output_xml_dir, f"aug_{image_count}.xml"))
         
-        image_count += 1
-        if image_count >= 500:
-            break
+#         image_count += 1
+#         if image_count >= 500:
+#             break
 
+
+
+
+
+import cv2
+import os
+import numpy as np
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+INPUT_DIR = "/Users/wanhoo/Documents/CSE40883/dataset/single_label_pic"
+OUTPUT_DIR = "/Users/wanhoo/Documents/CSE40883/dataset/single_label_pic_aug"
+
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# Only brightness/contrast-like changes (via brightness range)
+augmenter = ImageDataGenerator(
+    brightness_range=[0.7, 1.3],  # change lighting only
+    fill_mode='nearest'
+)
+
+# Number of lighting augmentations per original image
+NUM_AUG = 2
+
+# Expecting: turnleft/, turnright/
+for class_name in os.listdir(INPUT_DIR):
+    class_path = os.path.join(INPUT_DIR, class_name)
+    if not os.path.isdir(class_path):
+        continue
+
+    output_class_path = os.path.join(OUTPUT_DIR, class_name)
+    flipped_class = 'turnright' if class_name == 'turnleft' else 'turnleft'
+    flipped_output_path = os.path.join(OUTPUT_DIR, flipped_class)
+
+    os.makedirs(output_class_path, exist_ok=True)
+    os.makedirs(flipped_output_path, exist_ok=True)
+
+    for filename in os.listdir(class_path):
+        if not filename.lower().endswith(('.jpg', '.png', '.jpeg')):
+            continue
+
+        img_path = os.path.join(class_path, filename)
+        img = cv2.imread(img_path)
+        if img is None:
+            continue
+
+        base_name = os.path.splitext(filename)[0]
+
+        # Save original
+        cv2.imwrite(os.path.join(output_class_path, base_name + "_orig.jpg"), img)
+
+        # Flip manually and save under opposite label
+        flipped = cv2.flip(img, 1)
+        cv2.imwrite(os.path.join(flipped_output_path, base_name + "_flipped.jpg"), flipped)
+
+        # Augment original lighting
+        img_expanded = np.expand_dims(img, 0)
+        aug_iter = augmenter.flow(img_expanded, batch_size=1)
+        for i in range(NUM_AUG):
+            aug_img = next(aug_iter)[0].astype(np.uint8)
+            cv2.imwrite(os.path.join(output_class_path, f"{base_name}_aug{i}.jpg"), aug_img)
+
+        # Augment flipped lighting
+        flip_expanded = np.expand_dims(flipped, 0)
+        flip_iter = augmenter.flow(flip_expanded, batch_size=1)
+        for i in range(NUM_AUG):
+            flip_aug = next(flip_iter)[0].astype(np.uint8)
+            cv2.imwrite(os.path.join(flipped_output_path, f"{base_name}_flipped_aug{i}.jpg"), flip_aug)
+
+print("Flip and lighting augmentation complete.")

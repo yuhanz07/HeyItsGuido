@@ -1,0 +1,10 @@
+tensorflow==2.15.0
+opencv-python
+picamera2
+numpy
+matplotlib
+lxml
+protobuf
+scipy
+pyserial
+lgpio

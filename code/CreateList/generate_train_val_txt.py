@@ -2,10 +2,10 @@ import os
 from sklearn.model_selection import train_test_split
 
 # Path to your annotations
-annotation_dir = "/Users/wanhoo/Documents/CSE40883/dataset/captured_pic"
+annotation_dir = "/Users/wanhoo/Documents/CSE40883/dataset/new_pic"
 
 # Path to output folder (can be anywhere you like)
-output_dir = "/Users/wanhoo/Documents/CSE40883/code/xml2tfrecord"
+output_dir = "/Users/wanhoo/Documents/CSE40883/dataset"
 
 # Create output directory if it doesn't exist
 os.makedirs(output_dir, exist_ok=True)

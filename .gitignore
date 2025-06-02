@@ -1,24 +1,69 @@
 python3/
-labelImg/
-pretrained_model/
-dataset/ 
-exported_model/ 
-design/ 
-models/ 
-models_patched/ 
-training/
-training_backup/
 
-# Huge files
-*.record
-*.pbtxt
-*.DS_Store
+design/ 
+
+labelImg/
+
+models/ 
+models_patched/
+pretrained_model/
+
+exported_model/ 
+exported_model_new/ 
+exported_model_lr/ 
+
+training/
+training_ø/
+training_lr/
+training_backup/
 
 # TensorBoard logs
 events.out.*
 
-# Cache, build, and temporary files
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.pyc
 *.pyo
 *.swp
+*.py[cod]
+*.so
+
+# Environment folders
+tfod-env/
+tf-metal-py39-env/
+.python-version
+
+# Virtual environment files
+env/
+venv/
+ENV/
+env.bak/
+
+# TensorFlow saved/exported models and checkpoints
+pretrained_model/
+exported_model*/
+training_*/
+training_backup/
+*.pb
+*.ckpt*
+*.tflite
+*.h5
+
+# TF record files and label maps
+*.record
+*.pbtxt
+
+# Dataset (unless small sample is added manually)
+dataset/
+
+# macOS system files
+.DS_Store
+
+# Logs and cache
+*.log
+*.tmp
+logs/
+.cache/
+
+# Jupyter/IPython
+.ipynb_checkpoints/

@@ -1,7 +1,7 @@
 ################################################################
 # LED Controller for ND Robotics Course
 # 3-7-2025
-# Professor McLaughlinl
+# Professor McLaughlin
 ################################################################
 import threading
 import queue
@@ -10,24 +10,6 @@ import RPi.GPIO as GPIO
 import random
 
 class LEDController:
-    # LEDController for the TLC5947 24-channel, 12-bit PWM LED driver.
-    #
-    # This implementation uses three hard-coded GPIO pins:
-    #  - SIN (Data Input) on GPIO 23
-    #  - SCLK (Serial Clock) on GPIO 24
-    #  - XLAT (Latch) on GPIO 25
-    #
-    # The BLANK /DE pin is assumed to be tied externally (e.g., to ground) so that outputs are always enabled.
-    #
-    # All commands – updating an LED state (set_led or set_leds) and sending the complete matrix (send) –
-    # are queued and processed sequentially by a worker thread. This ensures the board is updated
-    # in the exact order requested by the calling program.
-    #
-    # On initialization, all 24 LEDs are set to off (0 intensity) and the full matrix is sent to the board.
-    #
-    # The controller converts LED intensities (0.0 to 1.0) to 12-bit grayscale values using gamma correction,
-    # assembles a 288-bit stream (with channel 23 first, down to channel 0),
-    # shifts the data out using bit-banging on SIN and SCLK, and pulses XLAT to latch the data.
     def __init__(self):
         # Hard-coded pin assignments.
         self.SIN_PIN = 23    # Data input
@@ -151,41 +133,78 @@ class LEDController:
         GPIO.cleanup(self._used_pins)
         print("LEDController Shutdown complete.")
 
+class Eyes_Control:
+    def look_left(controller):
+        controller.set_leds({
+            0:1, 1:1, 2:1,
+            3:1, 4:1, 5:0,
+            6:1, 7:1, 8:0,
+            9:1, 10:1, 11:1,
+            12:1, 13:1, 14:0,
+            15:1, 16:1, 17:0
+        })
+        controller.send()
+    
+    def look_right(controller):
+        controller.set_leds({
+            0:1, 1:1, 2:1,
+            3:0, 4:1, 5:1,
+            6:0, 7:1, 8:1,
+            9:1, 10:1, 11:1,
+            12:0, 13:1, 14:1,
+            15:0, 16:1, 17:1
+        })
+        controller.send()
+
+    def close_eyes(controller):
+        controller.set_leds({  # <-- CHANGED
+            0:1, 1:0, 2:1,
+            3:0, 4:1, 5:0,
+            6:1, 7:.5, 8:1,
+            9:1, 10:0, 11:1,
+            12:0, 13:1, 14:0,
+            15:1, 16:0, 17:1
+        })
+        controller.send()
+
+    def full_eyes(controller):
+        controller.set_leds({  # <-- CHANGED
+            0:1, 1:.5, 2:1,
+            3:.5, 4:1, 5:.5,
+            6:1, 7:.5, 8:1,
+            9:1, 10:.5, 11:1,
+            12:.5, 13:1, 14:.5,
+            15:1, 16:.5, 17:1
+        })
+        controller.send()
+        
+    def sad_eyes(controller):
+        controller.set_leds({  # <-- CHANGED
+            0:0, 1:.1, 2:0,
+            3:.1, 4:.3, 5:.1,
+            6:.1, 7:.3, 8:.3,
+            9:0, 10:.1, 11:0,
+            12:.1, 13:.3, 14:.1,
+            15:.3, 16:.3, 17:.3
+        })
+        controller.send()
+
 # Test suite when the module is executed directly.
 if __name__ == '__main__':
     print("Starting LEDController test suite...\n")
     controller = LEDController()
     
     try:
-        print("Test")
-        controller.set_leds({0: 1, 1: 1, 2: 1, 4: 1, 5: 1, 7: 1, 8: 1, 9: 1, 10: 1, 11: 1, 12: 1, 13: 1, 15: 1, 16: 1}) # normal
-        # controller.set_leds({3: 1, 4: 1, 5: 1, 12: 1, 13: 1, 14: 1}) # close eyes
-        # controller.set_leds({0: 1, 2: 1, 4: 1, 6: 1, 8: 1, 9: 1, 11: 1, 13: 1, 15: 1, 17: 1}) # warning
-        time.sleep(1)
-        
-        
-#         x_count = 1 # processing
-#         while x_count :
-#             onOff = random.randint(0,1)
-#             controller.set_led(0,onOff)
-#             onOff = random.randint(0,1)
-#             controller.set_led(1,onOff)
-#             onOff = random.randint(0,1)
-#             controller.set_led(2,onOff)
-#             onOff = random.randint(0,1)
-#             controller.set_led(5,onOff)
-#             onOff = random.randint(0,1)
-#             controller.set_led(8,onOff)
-#             onOff = random.randint(0,1)
-#             controller.set_led(7,onOff)
-#             onOff = random.randint(0,1)
-#             controller.set_led(6,onOff)
-#             onOff = random.randint(0,1)
-#             controller.set_led(3,onOff)
-#             onOff = random.randint(0,1)
-#             controller.send()
-#             x_count = x_count + 1
-#             time.sleep(.2)
+        x_count = 1
+        while(1):
+            Eyes_Control.full_eyes(controller)
+            time.sleep(.5)
+            Eyes_Control.look_right(controller)
+            time.sleep(.5)
+            Eyes_Control.look_left(controller)
+            time.sleep(.5)
+            Eyes_Control.close_eyes(controller)
+            time.sleep(.5)
             
     finally:
         controller.close()

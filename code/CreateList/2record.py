@@ -7,15 +7,16 @@ from PIL import Image
 from object_detection.utils import dataset_util
 
 # --- USER CONFIG ---
-LABEL_MAP = {'gostraight': 1, 'turnleft': 2, 'turnright': 3, 'stop': 4, 'yellowline': 5}  # must match label_map.pbtxt
-IMAGE_DIR = "/Users/wanhoo/Documents/CSE40883/dataset/captured_pic"
-ANNOTATION_DIR = "/Users/wanhoo/Documents/CSE40883/dataset/captured_pic"
+LABEL_MAP = {'turnleft': 1, 'turnright': 2}  # must match label_map.pbtxt
+IMAGE_DIR = "/Users/wanhoo/Documents/CSE40883/dataset/new_pics"
+ANNOTATION_DIR = "/Users/wanhoo/Documents/CSE40883/dataset/new_pics"
 SPLIT = "val"  # or "val"
-SPLIT_LIST = "/Users/wanhoo/Documents/CSE40883/code/xml2record/val.txt"  # a txt file listing filenames (no extension) to include in this TFRecord
-OUTPUT_PATH = f"/Users/wanhoo/Documents/CSE40883/code/xml2record/{SPLIT}.record"
+SPLIT_LIST = "/Users/wanhoo/Documents/CSE40883/dataset/val_lr.txt"  # a txt file listing filenames (no extension) to include in this TFRecord
+OUTPUT_PATH = f"/Users/wanhoo/Documents/CSE40883/dataset/{SPLIT}_lr.record"
 
 # --- CORE LOGIC ---
 def create_tf_example(xml_path, image_path):
+    print(f"Now parsing: {xml_path}")  # 👈 Add this line
     tree = ET.parse(xml_path)
     root = tree.getroot()
 
