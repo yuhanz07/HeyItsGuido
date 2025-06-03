@@ -48,14 +48,13 @@ It operates in three modes:
 ```
 CH1N/
 ├── code/             # All source code (main scripts, controllers, detection, UI)
-├── design/           # Mechanical 3D printing design (not included)
+├── design/           # Mechanical `.stl` files for 3D printing (not included)
 ├── pretrained_model/ # Download link in README
-├── exported_model*/  # Trained TensorFlow Lite models (not uploaded)
-├── dataset/          # Road sign training/validation dataset (partial)
-├── tfod-env/         # Local virtualenv (not included)
-├── README.md         # You're reading it!
+├── exported_model*/  # Trained TensorFlow models (not included)
+├── dataset/          # Road sign training/validation dataset (not included)
+├── tfod-env/         # Local virtual environment (not included)
+├── README.md         # You're reading it
 ```
-//
 
 ## Model & Training
 
