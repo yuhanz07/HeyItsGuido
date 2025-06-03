@@ -107,3 +107,9 @@ pip install -r requirements.txt
 - [Download SSD MobileNet V2 FPNLite 320x320](http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8.tar.gz)
   
 - [Download CNN Classifier (.h5)](https://your-google-drive-link)
+
+## Additional Reference
+
+- [How to install TensorFlow on Pi 5](https://emtech.cc/p/rp-tensorflow/)
+
+- [How to set up Pi Google Drive sync?](https://drive.google.com/file/d/1oZBOwEGr7q49s0m5D_n4EJjcNo2b8Wgk/view?usp=drive_link)
