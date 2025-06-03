@@ -8,7 +8,7 @@ It operates in three modes:
 
 - **Manual Control** – via PS5 controller joystick input
 - **Ambient and Themed Routines** – performs sequences with sound, LED and TFT display effects
-- **Autonomous Navigation** – detects road signs and follows a carpet track
+- **Autonomous Navigation** – detects road signs and follows the lane on a mapped carpet track
 
 ## Hardware Components
 
@@ -52,11 +52,11 @@ It operates in three modes:
 ## Project Structure
 ```
 CH1N/
-├── code/             # All source code (main scripts, controllers, detection, display)
+├── code/             # All source code
 ├── design/           # Mechanical `.stl` files for 3D printing (not included)
 ├── pretrained_model/ # Download link in README
 ├── exported_model*/  # Trained TensorFlow models (not included)
-├── dataset/          # Road sign and road track training/validation dataset of 500 images(not included)
+├── dataset/          # Road sign and lane training/validation dataset of 500 images(not included)
 ├── tfod-env/         # Local virtual environment (not included)
 ├── README.md         # You're reading it
 ```
@@ -64,19 +64,28 @@ CH1N/
 ## Model and Training
 
 - **Base model**: `ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8`
-- **Fine-tuned** on a sign and road line dataset of 500 images
+- **Fine-tuned** on a road sign and lane dataset of 500 images
 - **CNN classifier** trained on cropped road sign images for higher precision
 
 ### Key Changes to `pipeline.config`:
 
-```text
-num_classes: 4
-batch_size: 8
-fine_tune_checkpoint: pretrained_model/checkpoint/ckpt-0
-train_input_path: dataset/train.record
-eval_input_path: dataset/val.record
-label_map_path: dataset/label_map.pbtxt
-```
+- `num_classes` set to 5
+
+- `batch_size` set to 8
+
+- `num_steps` set to 1500
+
+- `fine_tune_checkpoint_type` changed to `"detection"`
+
+-  Added `load_all_detection_checkpoint_vars: false`
+
+- `fine_tune_checkpoint` changed to `pretrained_model/checkpoint/ckpt-0`
+
+- `train_input_path` changed to `dataset/train.record`
+
+- `eval_input_path` changed to `dataset/val.record`
+
+- `label_map_path` chanegd to `dataset/label_map.pbtxt`
 
 ## Setup Instructions
 
@@ -93,12 +102,8 @@ cd HeyItsGuido
 pip install -r requirements.txt
 ```
 
-3. Download Models and Create your own Dataset
+3. Download Pretrained Models and Train on Dataset
 
-```text
-🔗 Download pretrained detection model
-🔗 Download CNN classifier .h5
-pretrained_model/
-models/
-```
-
+[Download SSD MobileNet V2 FPNLite 320x320](http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8.tar.gz)
+  
+[Download CNN Classifier (.h5)](https://your-google-drive-link)
