@@ -10,29 +10,34 @@ It operates in three modes:
 - **Ambient and Themed Routines** – performs sequences with sound, LED and TFT display effects
 - **Autonomous Navigation** – detects road signs and follows a carpet track
 
-## Hardware Used
+## Hardware Components
 
+### Core Electronics
 - Raspberry Pi 5
 - PiCamera 2
 - PS5 DualSense Controller
+- Sabertooth motor controller
+- 2-channel Hi-Fi stereo amplifier
+- Speakers × 2
+- TFT display
+- LED controller
+- LED light × 24 (4 × 3 matrix × 2)
+### Power and Wiring
 - Sealed rechargeable lead-acid battery
 - High-current automotive toggle switch
 - Fuse block
-- Terminal strip * 2
-- Motor mount channel * 2
-- Sabertooth motor controller
-- Mini servo * 2
-- Rear drive motor * 2
-- Rear wheel * 2
+- Terminal strip × 2
+- Jumper wires
+- Screws, washers, bolts, nuts, velcro, zip ties
+### Actuators
+- Rear drive motor × 2
+- Rear wheel × 2
 - Center wheel
-- 2-channel Hi-Fi stereo amplifier
-- Speaker * 2
-- TFT display
-- LED contoller
-- LED light * 24 (4x3 matrix * 2)
-- Jumpers, screws, washers, bolts, nuts, velcros and zip ties
+- Mini servo × 2
+- Motor mount channel × 2
 
 ## Software Stack
+
 - **Python 3.11**
 - **RealVNC** - remote desktop access
 - **TensorFlow** - training and running visual recognition models
@@ -47,19 +52,19 @@ It operates in three modes:
 ## Project Structure
 ```
 CH1N/
-├── code/             # All source code (main scripts, controllers, detection, UI)
+├── code/             # All source code (main scripts, controllers, detection, display)
 ├── design/           # Mechanical `.stl` files for 3D printing (not included)
 ├── pretrained_model/ # Download link in README
 ├── exported_model*/  # Trained TensorFlow models (not included)
-├── dataset/          # Road sign training/validation dataset (not included)
+├── dataset/          # Road sign and road track training/validation dataset of 500 images(not included)
 ├── tfod-env/         # Local virtual environment (not included)
 ├── README.md         # You're reading it
 ```
 
-## Model & Training
+## Model and Training
 
 - **Base model**: `ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8`
-- **Fine-tuned** on a custom sign dataset
+- **Fine-tuned** on a sign and road line dataset of 500 images
 - **CNN classifier** trained on cropped road sign images for higher precision
 
 ### Key Changes to `pipeline.config`:
@@ -78,8 +83,8 @@ label_map_path: dataset/label_map.pbtxt
 1. Clone the Repository
    
 ```text
-git clone https://github.com/yourusername/guido-droid.git
-cd guido-droid
+git clone https://github.com/yuhanz07/HeyItsGuido.git
+cd HeyItsGuido
 ```
 
 2. Install Dependencies
@@ -88,7 +93,7 @@ cd guido-droid
 pip install -r requirements.txt
 ```
 
-3. Download Models and Dataset
+3. Download Models and Create your own Dataset
 
 ```text
 🔗 Download pretrained detection model
