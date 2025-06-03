@@ -13,12 +13,23 @@ It operates in three modes:
 
 - Raspberry Pi 5 (4GB)
 - PiCamera 2
-- TFT display (SPI)
-- RGB LED matrix (optional)
-- Mini speaker (for sound effects)
 - PS5 DualSense Controller
-- Motor driver (e.g., L298N)
-- Carpet track with printed road signs
+- Sealed rechargeable lead-acid battery (12V 5A)
+- High-current automotive toggle switch
+- Fuse block
+- Terminal strip * 2
+- Motor mount channel * 2
+- Sabertooth motor controller
+- Mini servo * 2
+- Rear drive motor * 2
+- Rear wheel * 2
+- Center wheel
+- 2-channel Hi-Fi stereo amplifier
+- Speaker * 2
+- TFT display (SPI)
+- LED contoller
+- LED matrix (4x3) * 2
+- Jumpers, screws, washers, bolts, nuts, velcros and zip ties
 
 ## Software Stack
 
@@ -26,7 +37,7 @@ It operates in three modes:
 - TensorFlow Lite (Object Detection + CNN Classifier)
 - OpenCV
 - PiCamera2
-- Pygame (for sound)
+- Pygame
 - `evdev` or `pygame` joystick interface
 - GPIO control via `lgpio` or `RPi.GPIO`
  
