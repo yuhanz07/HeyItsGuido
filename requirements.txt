@@ -8,3 +8,4 @@ protobuf
 scipy
 pyserial
 lgpio
+pygame
