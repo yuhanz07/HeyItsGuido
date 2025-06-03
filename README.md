@@ -1,20 +1,21 @@
-# CH1N
-*CSE40883 Introduction to Robotics course project*
+# HeyItsGuido 
+
+*Aka CSE40883 Introduction to Robotics course project CH1N*
 
 **CH1N** is a multi-modal autonomous droid built using **Raspberry Pi 5**, **PiCamera2**, **PS5 controller**, and **TensorFlow**, inspired by *Cars* iconic character Guido and *Star Wars* droid naming convention.
 
 It operates in three modes:
 
 - **Manual Control** – via PS5 controller joystick input
-- **Ambient and Pre-programmed Routines** – performs sequences with sound, LED/TFT display effects
+- **Ambient and Pre-programmed Routines** – performs sequences with sound, LED and TFT display effects
 - **Autonomous Navigation** – detects road signs and follows a carpet track
 
 ## Hardware Used
 
-- Raspberry Pi 5 (4GB)
+- Raspberry Pi 5
 - PiCamera 2
 - PS5 DualSense Controller
-- Sealed rechargeable lead-acid battery (12V 5A)
+- Sealed rechargeable lead-acid battery
 - High-current automotive toggle switch
 - Fuse block
 - Terminal strip * 2
@@ -26,38 +27,34 @@ It operates in three modes:
 - Center wheel
 - 2-channel Hi-Fi stereo amplifier
 - Speaker * 2
-- TFT display (SPI)
+- TFT display
 - LED contoller
-- LED matrix (4x3) * 2
+- LED light * 24 (4x3 matrix * 2)
 - Jumpers, screws, washers, bolts, nuts, velcros and zip ties
 
 ## Software Stack
 
-- Python 3
-- TensorFlow Lite (Object Detection + CNN Classifier)
-- OpenCV
+- RealVNC
 - PiCamera2
-- Pygame
-- `evdev` or `pygame` joystick interface
-- GPIO control via `lgpio` or `RPi.GPIO`
+- Python 3
+- TensorFlow
+  - Object Detection API
+  - CNN Classifier
+- OpenCV
+- labelImg
+- `pygame` joystick interface
+- GPIO control via `lgpio`
  
 ## Project Structure
 
 CH1N/
-
-├── code/ # All source code (main scripts, controllers, detection, UI)
-
-├── design/ # Mechanical 3D printing design 
-
+├── code/             # All source code (main scripts, controllers, detection, UI)
+├── design/           # Mechanical 3D printing design (not included)
 ├── pretrained_model/ # Download link in README
-
-├── exported_model*/ # Trained TensorFlow Lite models (not uploaded)
-
-├── dataset/ # dataset of road sign and track (full set not included)
-
-├── tfod-env/ # Local virtualenv (not included)
-
-├── README.md # You're reading it!
+├── exported_model*/  # Trained TensorFlow Lite models (not uploaded)
+├── dataset/          # Road sign training/validation dataset (partial)
+├── tfod-env/         # Local virtualenv (not included)
+├── README.md         # You're reading it!
 
 ## Modes and Features
 
