@@ -7,7 +7,7 @@
 It operates in three modes:
 
 - **Manual Control** – via PS5 controller joystick input
-- **Ambient and Pre-programmed Routines** – performs sequences with sound, LED and TFT display effects
+- **Ambient and Themed Routines** – performs sequences with sound, LED and TFT display effects
 - **Autonomous Navigation** – detects road signs and follows a carpet track
 
 ## Hardware Used
@@ -33,20 +33,19 @@ It operates in three modes:
 - Jumpers, screws, washers, bolts, nuts, velcros and zip ties
 
 ## Software Stack
-
-- RealVNC
-- PiCamera2
-- Python 3
-- TensorFlow
+- **Python 3.11**
+- **RealVNC** - remote desktop access
+- **TensorFlow** - training and running visual recognition models
   - Object Detection API
-  - CNN Classifier
-- OpenCV
-- labelImg
-- `pygame` joystick interface
-- GPIO control via `lgpio`
+  - Custom CNN Classifier (`.h5`)
+- **OpenCV** – preprocessing image 
+- **labelImg** - labeling image 
+- **PiCamera2** – camera interface for Raspberry Pi
+- **pygame** – joystick interface and sound effect
+- **lgpio** – GPIO control
  
 ## Project Structure
-
+```
 CH1N/
 ├── code/             # All source code (main scripts, controllers, detection, UI)
 ├── design/           # Mechanical 3D printing design (not included)
@@ -55,23 +54,8 @@ CH1N/
 ├── dataset/          # Road sign training/validation dataset (partial)
 ├── tfod-env/         # Local virtualenv (not included)
 ├── README.md         # You're reading it!
-
-## Modes and Features
-
-### Manual Mode
-- Left joystick → directional movement
-- Buttons → triggers LED, sound, or visual effects
-- TFT display shows current state or character expression
-
-### Routine Mode
-- Trigger pre-programmed action sequences
-- Includes sound effects + LED/TFT visual animations
-
-### Autonomous Mode
-- Real-time road sign detection using PiCamera2 + TensorFlow Lite
-- Recognizes: "Turn Left", "Turn Right", "Go Straight" and "Stop"
-- Executes corresponding movement along a mapped carpet track
-- CNN classifier improves reliability for visually ambiguous signs
+```
+//
 
 ## Model & Training
 
