@@ -91,14 +91,14 @@ CH1N/
 
 1. Clone the repository
    
-```text
+```
 git clone https://github.com/yuhanz07/HeyItsGuido.git
 cd HeyItsGuido
 ```
 
 2. Install dependencies
 
-```text
+```
 pip install -r requirements.txt
 ```
 
