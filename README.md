@@ -89,20 +89,20 @@ CH1N/
 
 ## Setup Instructions
 
-1. Clone the Repository
+1. Clone the repository
    
 ```text
 git clone https://github.com/yuhanz07/HeyItsGuido.git
 cd HeyItsGuido
 ```
 
-2. Install Dependencies
+2. Install dependencies
 
 ```text
 pip install -r requirements.txt
 ```
 
-3. Download Pretrained Models and Train on Dataset
+3. Download pretrained models and train on dataset
 
 - [Download SSD MobileNet V2 FPNLite 320x320](http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8.tar.gz)
   
