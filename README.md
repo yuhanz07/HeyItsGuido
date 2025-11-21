@@ -65,7 +65,7 @@ CH1N/
 
 - **Base model**: `ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8`
 - **Fine-tuned** on a road sign and lane dataset of 500 images
-- **CNN classifier** trained on cropped road sign images for higher precision
+- **CNN classifier** trained for lane recognition and following
 
 ### Key Changes to `pipeline.config`:
 
