@@ -2,7 +2,7 @@
 
 *Aka CSE40883 Introduction to Robotics course project CH1N*
 
-**CH1N** is a multi-modal autonomous droid built using **Raspberry Pi 5**, **PiCamera2**, **PS5 controller**, and **TensorFlow**, inspired by *Cars* iconic character Guido and *Star Wars* droid naming convention.
+**CH1N** is a droid built using **Raspberry Pi 5**, **PiCamera2**, **PS5 controller**, and **TensorFlow**, inspired by *Cars* iconic character Guido and *Star Wars* droid naming convention.
 
 It operates in three modes:
 
